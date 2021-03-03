@@ -5,13 +5,13 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     let S = amount - contribution; // тело кредита
     let P = percent / 100 / 12; // 1/12 процентной ставки
     let date1 = new Date();
-
-    if ((percent < 0 ||  contribution < 0 || amount < 0 || date < 0 ) || 
+    let n = (date.getFullYear()*12 + date.getMonth()) - (date1.getFullYear()*12 + date1.getMonth());
+    
+    if ((percent < 0 ||  contribution < 0 || amount < 0 || n < 0 ) || 
     (isNaN(percent) === true|| isNaN(contribution) === true || isNaN(amount) === true || isNaN(date) === true)) {
         return "Ошибка данные введены неверно";
     }
 
-    let n = (date.getFullYear()*12 + date.getMonth()) - (date1.getFullYear()*12 + date1.getMonth());
     let monthAmount = S * ( P + P / (((1 + P) ** n) - 1));
     let totalAmount = monthAmount * n;
 
