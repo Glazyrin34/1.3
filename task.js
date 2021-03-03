@@ -6,6 +6,11 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     let P = percent / 100 / 12; // 1/12 процентной ставки
     let date1 = new Date();
 
+    if ((percent < 0 ||  contribution < 0 || amount < 0 || date < 0 ) || 
+    (isNaN(percent) === true|| isNaN(contribution) === true || isNaN(amount) === true || isNaN(date) === true)) {
+        return "Ошибка данные введены неверно";
+    }
+
     let n = (date.getFullYear()*12 + date.getMonth()) - (date1.getFullYear()*12 + date1.getMonth());
     let monthAmount = S * ( P + P / (((1 + P) ** n) - 1));
     let totalAmount = monthAmount * n;
@@ -16,13 +21,11 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 
 function getGreeting(name) {
     
-    let greeting;
-
     if (name === "" || name === null || name === undefined) {
-        greeting = "Привет, мир! Меня зовут Аноним.";
-    } else {
-        greeting = `Привет, мир! Меня зовут ${name}.`;
-    }
+        name = "Аноним";
+    } 
+
+    let greeting = `Привет, мир! Меня зовут ${name}.`;
     
     return greeting;
 }
